@@ -1,6 +1,10 @@
+
+<div class="page">
+
 <?php
   include("template/header.php")
  ?>
+<main class="site-content">
 
   <form id="form" class="m-5" action="" method="POST">
     <div class="form-groupe">
@@ -80,6 +84,10 @@
   </div>
 </div>
 
+</main>
+
  <?php
    include("template/footer.php")
   ?>
+
+</div>

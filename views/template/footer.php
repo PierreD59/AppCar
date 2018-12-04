@@ -1,5 +1,5 @@
-<footer>
-  <p>A footer if you need one</p>
+<footer class="bg-dark">
+
 </footer>
 
  <script src="js/vendor/modernizr-3.6.0.min.js"></script>
