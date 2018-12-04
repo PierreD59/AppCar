@@ -1,32 +1,35 @@
-<?php
-include("template/header.php")
-?>
+<div class="page">
 
-<div class="container-fluid">
-  <div class="row">
-    <div class="m-5">
-        <p><b>Vehicle :</b> <?= $vehicle->getName() ?></p>
-        <p"><b>Label :</b> <?= $vehicle->getLabel() ?></p>
-        <p"><b>Type of Vehicle:</b> <?= $vehicle->getType() ?></p>
-        <p"><b>Color :</b> <?= $vehicle->getColor() ?></p>
-        <p"><b>Wheels :</b> <?= $vehicle->getWheel() ?></p>
-        <p"><b>Door :</b> <?= $vehicle->getDoor() ?></p>
-        <!-- Button return index -->
-        <a href="index.php" class="btn btn-primary text-light">Return</a>
+  <?php include("template/header.php") ?>
+  <main class="site-content">
 
-        <!-- Button edit modal -->
-        <a type="button" class="btn btn-warning text-dark" data-toggle="modal" data-target="#exampleModalCenter">Edit</a>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="m-5">
+          <p><b>Vehicle :</b><?= $vehicle->getName() ?> </p>
+          <p"><b>Label :</b> <?= $vehicle->getLabel() ?></p>
+          <p"><b>Type of Vehicle:</b><?= $vehicle->getType() ?></p>
+          <p"><b>Color :</b><?= $vehicle->getColor() ?> </p>
+          <p"><b>Wheels :</b><?= $vehicle->getWheel() ?></p>
+          <p"><b>Door :</b><?= $vehicle->getDoor() ?></p>
 
-        <!-- Button delete -->
-        <a class="btn btn-danger text-light" href="index.php?remove=<?= $vehicle->getId(); ?>&type=<?= $vehicle->getType(); ?>">Delete</a>
+          <!-- Button return index -->
+          <a href="index.php" class="btn btn-primary text-light">Return</a>
+
+          <!-- Button edit modal -->
+          <a type="button" class="btn btn-warning text-dark" data-toggle="modal" data-target="#exampleModalCenter">Edit</a>
+
+          <!-- Button delete -->
+          <a class="btn btn-danger text-light" href="index.php?remove=<?= $vehicle->getId(); ?>&type=<?= $vehicle->getType(); ?>">Delete</a>
+        </div>
+
+      </div>
     </div>
-
-  </div>
-</div>
 
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -36,7 +39,8 @@ include("template/header.php")
             </button>
           </div>
           <div class="modal-body">
-            <form id="form" class="m-5" action="detail.php?edit=<?= $vehicle->getId(); ?>&type=<?= $vehicle->getType(); ?>" method="POST">
+            <form id="form" class="m-5" action="detail.php?edit=<?= $vehicle->getId(); ?>&type=<?= $vehicle->getType(); ?>"
+              method="POST">
               <div class="form-groupe">
                 <label for="name">Name : </label><br>
                 <input type="text" id="name" name="name" placeholder="Megane" required><br>
@@ -45,7 +49,7 @@ include("template/header.php")
                 <input type="text" id="color" name="color" placeholder="Rouge" required><br>
 
                 <label class="mt-3" for="color">Wheels : </label><br>
-                <input type="text" name="wheel" id="wheel" value="0" style="width: 50px;" required/><br>
+                <input type="text" name="wheel" id="wheel" value="0" style="width: 50px;" required /><br>
 
                 <label class="mt-3" for="color">Doors : </label><br>
                 <input type="text" name="door" id="door" value="0" style="width: 50px;" /><br>
@@ -96,7 +100,6 @@ include("template/header.php")
 
 
 
-
-<?php
-include("template/footer.php")
-?>
+  </main>
+  <?php include("template/footer.php") ?>
+</div>
