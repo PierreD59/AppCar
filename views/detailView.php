@@ -15,15 +15,14 @@ include("template/header.php")
         <a href="index.php" class="btn btn-primary text-light">Return</a>
 
         <!-- Button edit modal -->
-        <a href="detail.php?edit=<?= $vehicle->getId(); ?>&type=<?= $vehicle->getType(); ?>" type="button" class="btn btn-warning text-dark" data-toggle="modal" data-target="#exampleModalCenter">Edit</a>
+        <a type="button" class="btn btn-warning text-dark" data-toggle="modal" data-target="#exampleModalCenter">Edit</a>
 
         <!-- Button delete -->
-        <a  class="btn btn-danger text-light" href="index.php?remove=<?= $vehicle->getId(); ?>&type=<?= $vehicle->getType(); ?>">Delete</a>
+        <a class="btn btn-danger text-light" href="index.php?remove=<?= $vehicle->getId(); ?>&type=<?= $vehicle->getType(); ?>">Delete</a>
     </div>
 
   </div>
 </div>
-
 
 
     <!-- Modal -->
@@ -37,7 +36,7 @@ include("template/header.php")
             </button>
           </div>
           <div class="modal-body">
-            <form id="form" class="m-5" action="" method="POST">
+            <form id="form" class="m-5" action="detail.php?edit=<?= $vehicle->getId(); ?>&type=<?= $vehicle->getType(); ?>" method="POST">
               <div class="form-groupe">
                 <label for="name">Name : </label><br>
                 <input type="text" id="name" name="name" placeholder="Megane" required><br>
