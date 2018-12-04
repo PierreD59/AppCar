@@ -147,6 +147,9 @@ class VehicleManager {
     public function update(Vehicle $vehicle)
     {
         $query = $this->getDb()->prepare('UPDATE vehicles SET name = :name, label = :label, color = :color, door = :door, wheel = :wheel, type = :type WHERE id = :id');
+
+        $query->bindValue('id', $vehicle->getId(), PDO::PARAM_INT);
+        
         $query->bindValue('name', $vehicle->getName(), PDO::PARAM_STR);
         $query->bindValue('label', $vehicle->getLabel(), PDO::PARAM_STR);
         $query->bindValue('color', $vehicle->getColor(), PDO::PARAM_STR);
