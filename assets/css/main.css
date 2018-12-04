@@ -112,6 +112,7 @@ body {
 
 .card {
   margin-bottom: 100px;
+  max-height: 180px;
 }
 
 footer {
