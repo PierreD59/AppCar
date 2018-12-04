@@ -53,21 +53,20 @@ class VehicleManager {
             $query->bindValue('color', $vehicle->getColor(), PDO::PARAM_STR);
             $query->bindValue('door', $vehicle->getDoor(), PDO::PARAM_INT);
             $query->bindValue('wheel', $vehicle->getWheel(), PDO::PARAM_INT);
-            $query->bindValue('type', $vehicle->getType(), PDO::PARAM_INT);
+            $query->bindValue('type', $vehicle->getType(), PDO::PARAM_STR);
 
             $query->execute();
 
         } elseif ($vehicle->getType() === "Truck") 
         {
 
-            $query = $this->getDb()->prepare('INSERT INTO vehicles(name, label, color, door, wheel, trailer, type) VALUES (:name, :label, :color, :door, :wheel, trailer, :type)');
+            $query = $this->getDb()->prepare('INSERT INTO vehicles(name, label, color, door, wheel, type) VALUES (:name, :label, :color, :door, :wheel, :type)');
             $query->bindValue('name', $vehicle->getName(), PDO::PARAM_STR);
             $query->bindValue('label', $vehicle->getLabel(), PDO::PARAM_STR);
             $query->bindValue('color', $vehicle->getColor(), PDO::PARAM_STR);
             $query->bindValue('door', $vehicle->getDoor(), PDO::PARAM_INT);
             $query->bindValue('wheel', $vehicle->getWheel(), PDO::PARAM_INT);
-            $query->bindValue('trailer', $vehicle->getTrailer(), PDO::PARAM_INT);
-            $query->bindValue('type', $vehicle->getType(), PDO::PARAM_INT);
+            $query->bindValue('type', $vehicle->getType(), PDO::PARAM_STR);
 
             $query->execute();
 
@@ -79,7 +78,7 @@ class VehicleManager {
             $query->bindValue('label', $vehicle->getLabel(), PDO::PARAM_STR);
             $query->bindValue('color', $vehicle->getColor(), PDO::PARAM_STR);
             $query->bindValue('wheel', $vehicle->getWheel(), PDO::PARAM_INT);
-            $query->bindValue('type', $vehicle->getType(), PDO::PARAM_INT);
+            $query->bindValue('type', $vehicle->getType(), PDO::PARAM_STR);
 
             $query->execute();
 
@@ -92,13 +91,15 @@ class VehicleManager {
      * @param $info
      * @return Vehicle 
      */
-    public function getVehicle()
+    public function getVehicle($info)
     {
         $query = $this->getDB()->prepare('SELECT * FROM vehicles WHERE id = :id');
-        $query->bindValue('name', $info, PDO::PARAM_INT);
-              
+        $query->bindValue('id', $info, PDO::PARAM_INT);
         $query->execute();
-
+        $vehicle = $query->fetch(PDO::FETCH_ASSOC);
+        
+        $class = ucfirst($vehicle['type']);
+        return new $class($vehicle);
     }
 
     /**
@@ -108,7 +109,7 @@ class VehicleManager {
      */
     public function getVehicles()
     {
-        $query = $this->getDB()->query('SELECT name, label, type FROM vehicles');
+        $query = $this->getDB()->query('SELECT id, name, label, type FROM vehicles');
         $dataVehicles = $query->fetchAll(PDO::FETCH_ASSOC);
         $arrayOfVehicles = [];
 
@@ -130,10 +131,10 @@ class VehicleManager {
 
     }
 
-    public function delete(Vehicle $vehicle)
+    public function deleteVehicle($vehicle)
     {
         $query = $this->getDb()->prepare('DELETE FROM vehicles WHERE id = :id');
-        $query->bindValue('id', $vehicle->getId(), PDO::PARAM_INT);
+        $query->bindValue('id', $vehicle, PDO::PARAM_INT);
         $query->execute();
     }
 
@@ -145,14 +146,13 @@ class VehicleManager {
      */
     public function update(Vehicle $vehicle)
     {
-        $query = $this->getDb()->prepare('UPDATE vehicles SET name = :name, label = :label, color = :color, door = :door, wheel = :wheel, trailer = :trailer, type = :type WHERE id = :id');
+        $query = $this->getDb()->prepare('UPDATE vehicles SET name = :name, label = :label, color = :color, door = :door, wheel = :wheel, type = :type WHERE id = :id');
         $query->bindValue('name', $vehicle->getName(), PDO::PARAM_STR);
         $query->bindValue('label', $vehicle->getLabel(), PDO::PARAM_STR);
         $query->bindValue('color', $vehicle->getColor(), PDO::PARAM_STR);
         $query->bindValue('door', $vehicle->getDoor(), PDO::PARAM_INT);
         $query->bindValue('wheel', $vehicle->getWheel(), PDO::PARAM_INT);
-        $query->bindValue('trailer', $vehicle->getTrailer(), PDO::PARAM_INT);
-        $query->bindValue('type', $vehicle->getType(), PDO::PARAM_INT);
+        $query->bindValue('type', $vehicle->getType(), PDO::PARAM_STR);
         
         $query->execute();
     }

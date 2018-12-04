@@ -7,8 +7,8 @@ abstract class Vehicle {
                 $name,
                 $label,
                 $color,
-                $door = 0,
-                $wheel = 0,
+                $door,
+                $wheel,
                 $type;
 
 
@@ -29,6 +29,7 @@ abstract class Vehicle {
      */
     public function hydrate(array $donnees)
     {
+
         foreach ($donnees as $key => $value) 
         {
             // On récupère le nom du setter correspondant à l'attribut.
@@ -198,11 +199,11 @@ abstract class Vehicle {
         return $this->wheel;
     }
 
-                /**
-                 * Get the value of type
-                 */ 
-                public function getType()
-                {
-                                return $this->type;
-                }
+    /**
+     * Get the value of type
+     */ 
+    public function getType()
+    {
+        return $this->type;
     }
+}
